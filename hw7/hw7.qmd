@@ -94,17 +94,65 @@ This databse contains data on emplyoees at a company, including names, photos, c
 
 ## Crows-foot diagram
 
-(add a description of the diagram and what the reader is seeing.)
-
+Here is a diagram showing the relationship between entites
 ```{mermaid}
 %%| echo: false
 erDiagram
+    peopleroles }|..|| people :has
+    peopleroles }|--|| skills :has
+    peopleskills }|--|| people :has
+    peopleskills }|--|| skills :has
 
+peopleroles  
+{
+    primary_key peopleroles_id
+    date peopleskills_date_aquired
+    foreign_key int skills_id
+    foreign_key int people_id
+}  
+
+roles 
+{
+    primary_key role_id
+    varchar role_name
+    int role_sort_priority
+}
+
+peopleskills 
+{
+    primary_key peopleskills_id
+    date peopleskills_date_aquired
+    foreign_key int skills_id
+    foreign_key int people_id
+}
+
+people 
+{
+  primary_key people_id
+  varchar people_first_name
+  varchar people_last_name
+  varchar people_email
+  varchar people_linkedin_url
+  varchar people_headshot_url
+  varchar people_discord_handle
+  varchar people_brief_bio
+  varchar people_date_joined
+}
+
+skills 
+{
+    primary_key skills_id
+    varchar skills_name
+    varchar skills_description
+    varchar skills_tag
+    varchar skills_url
+    varchar skills_time_commitment
+}
 ```
 
 ### People table
 
-The *people* table contains elements that describe ... 
+The *people* table contains elements that describe all of the people who work at the company
 
 Below is a list of data in the *people* table.
 
@@ -127,7 +175,7 @@ df
 
 ### Skills table
 
-The *skills* table contains elements that describe ... 
+The *skills* table contains elements that describe all of the skills currently listed that may be applied to those in the company
 
 Below is a list of data in the *skills* table.
 
@@ -150,7 +198,7 @@ df
 
 ### Roles table
 
-The *roles* table contains elements that describe ... 
+The *roles* table contains elements that describe the various roles it is possible to have at the company
 
 Below is a list of data in the *roles* table.
 
@@ -279,7 +327,7 @@ df
 sql = """
 SELECT p.people_first_name, p.people_last_name
 FROM people p
-JOIN people_roles pr ON p.people_id = pr.people_id
+JOIN peopleroles pr ON p.people_id = pr.people_id
 JOIN roles r ON pr.role_id = r.role_id
 WHERE r.role_name = 'Developer'
 """
@@ -352,7 +400,7 @@ df
 sql = """
 SELECT p.people_first_name, p.people_last_name, s.skills_name
 FROM people p
-JOIN people_roles pr ON p.people_id = pr.people_id
+JOIN peopleroles pr ON p.people_id = pr.people_id
 JOIN roles r ON pr.role_id = r.role_id
 JOIN peopleskills ps ON p.people_id = ps.people_id
 JOIN skills s ON ps.skills_id = s.skills_id
@@ -379,7 +427,7 @@ df
 sql = """
 SELECT r.role_id, r.role_name
 FROM roles r
-LEFT JOIN people_roles pr ON r.role_id = pr.role_id
+LEFT JOIN peopleroles pr ON r.role_id = pr.role_id
 WHERE pr.people_id IS NULL
 GROUP BY r.role_id
 """
@@ -399,6 +447,6 @@ df
 ```
 
 ## Reflection
+I really enjoyed this assignment. I am starting to like databases more and more as we get deeper into the semester, as at the beginning I wasn't very excited for this class. It feels kinda like a big puzzle, and it's satisfying to get everything working correctly, the only downside is that I wish sql errors were a bit more verbose, like regular programing language error outputs. It's not a big issue once you know what you are doing, but at the learning stage I am at, it is hard to keep all of the proper syntax in place and easily see where I made mistakes, so a lot of time was spent debugging the sql.
 
-(Write a paragraph expressing your thoughts, feelings, and insights about your experience with this assignment.  Pause and breath before writing - I'm trying to encourage critical thinking and self-awareness while allowing you to explore the connections between theory and practice. And yes, delete this paragraph.)
-
+Another issue I ran into during this assignment was with poetry not connecting to the most recent version of python I had installed, and complaining that it was on 3.10.12 when I also had 3.11.3 installed. In an attempt to fix this I accidently uninstalled my entire desktop environment on Ubuntu, but it was a realtively easy fix and I found it more ammsuing that frustrating.
