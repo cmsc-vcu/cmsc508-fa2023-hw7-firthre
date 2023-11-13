@@ -17,7 +17,7 @@
 # Drops all tables.  This section should be amended as new tables are added.
 
 SET FOREIGN_KEY_CHECKS=0;
-DROP TABLE IF EXISTS people_roles;
+DROP TABLE IF EXISTS peopleroles;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS peopleskills;
 DROP TABLE IF EXISTS people;
@@ -123,13 +123,12 @@ CREATE TABLE peopleskills (
 INSERT INTO peopleskills (peopleskills_id, skills_id, people_id, peopleskills_date_acquired) VALUES (1, 1, 1, '2023-01-01'), (2, 3, 1, '2023-01-02'), (3, 6, 1, '2023-01-03');
 INSERT INTO peopleskills (peopleskills_id, skills_id, people_id, peopleskills_date_acquired) VALUES (4, 3, 2, '2023-01-04'), (5, 4, 2, '2023-01-05'), (6, 5, 2, '2023-01-06');
 INSERT INTO peopleskills (peopleskills_id, skills_id, people_id, peopleskills_date_acquired) VALUES (7, 1, 3, '2023-01-07'), (8, 5, 3, '2023-01-08');
-INSERT INTO peopleskills (peopleskills_id, skills_id, people_id, peopleskills_date_acquired) VALUES (9, NULL, 4, NULL);
-INSERT INTO peopleskills (peopleskills_id, skills_id, people_id, peopleskills_date_acquired) VALUES (10, 3, 5, '2023-01-09'), (11, 6, 5, '2023-01-10');
-INSERT INTO peopleskills (peopleskills_id, skills_id, people_id, peopleskills_date_acquired) VALUES (12, 2, 6, '2023-01-11'), (13, 3, 6, '2023-01-12'), (14, 4, 6, '2023-01-13');
-INSERT INTO peopleskills (peopleskills_id, skills_id, people_id, peopleskills_date_acquired) VALUES (15, 3, 7, '2023-01-14'), (16, 5, 7, '2023-01-15'), (17, 6, 7, '2023-01-16');
-INSERT INTO peopleskills (peopleskills_id, skills_id, people_id, peopleskills_date_acquired) VALUES (18, 1, 8, '2023-01-17'), (19, 3, 8, '2023-01-18'), (20, 5, 8, '2023-01-19'), (21, 6, 8, '2023-01-20');
-INSERT INTO peopleskills (peopleskills_id, skills_id, people_id, peopleskills_date_acquired) VALUES (22, 2, 9, '2023-01-21'), (23, 5, 9, '2023-01-22'), (24, 6, 9, '2023-01-23');
-INSERT INTO peopleskills (peopleskills_id, skills_id, people_id, peopleskills_date_acquired) VALUES (25, 1, 10, '2023-01-24'), (26, 4, 10, '2023-01-25'), (27, 5, 10, '2023-01-26');
+INSERT INTO peopleskills (peopleskills_id, skills_id, people_id, peopleskills_date_acquired) VALUES (9, 3, 5, '2023-01-09'), (10, 6, 5, '2023-01-10');
+INSERT INTO peopleskills (peopleskills_id, skills_id, people_id, peopleskills_date_acquired) VALUES (11, 2, 6, '2023-01-11'), (12, 3, 6, '2023-01-12'), (13, 4, 6, '2023-01-13');
+INSERT INTO peopleskills (peopleskills_id, skills_id, people_id, peopleskills_date_acquired) VALUES (14, 3, 7, '2023-01-14'), (15, 5, 7, '2023-01-15'), (16, 6, 7, '2023-01-16');
+INSERT INTO peopleskills (peopleskills_id, skills_id, people_id, peopleskills_date_acquired) VALUES (17, 1, 8, '2023-01-17'), (18, 3, 8, '2023-01-18'), (19, 5, 8, '2023-01-19'), (20, 6, 8, '2023-01-20');
+INSERT INTO peopleskills (peopleskills_id, skills_id, people_id, peopleskills_date_acquired) VALUES (21, 2, 9, '2023-01-21'), (22, 5, 9, '2023-01-22'), (23, 6, 9, '2023-01-23');
+INSERT INTO peopleskills (peopleskills_id, skills_id, people_id, peopleskills_date_acquired) VALUES (24, 1, 10, '2023-01-24'), (25, 4, 10, '2023-01-25'), (26, 5, 10, '2023-01-26');
 
 # Section 8
 # Create roles( id, name, sort_priority )
@@ -158,7 +157,7 @@ INSERT INTO roles (role_id, role_name, role_sort_priority) VALUES (6, 'Mentor', 
 # Create peopleroles( id, people_id, role_id, date_assigned )
 # None of the fields can be null.  ID can be auto_increment
 
-CREATE TABLE people_roles (
+CREATE TABLE peopleroles (
     peopleroles_id INT AUTO_INCREMENT, 
     PRIMARY KEY(peopleroles_id),
     people_id INT,
@@ -181,15 +180,15 @@ CREATE TABLE people_roles (
 # Person 9 is Developer
 # Person 10 is Developer and Designer
 
-INSERT INTO people_roles (peopleroles_id, people_id, role_id, peopleroles_date_role_acquired) VALUES (1, 1, 2, '2023-01-01');
-INSERT INTO people_roles (peopleroles_id, people_id, role_id, peopleroles_date_role_acquired) VALUES (2, 2, 5, '2023-01-02'), (3, 2, 6, '2023-01-013');
-INSERT INTO people_roles (peopleroles_id, people_id, role_id, peopleroles_date_role_acquired) VALUES (4, 3, 2, '2023-01-04'), (5, 3, 4, '2023-01-05');
-INSERT INTO people_roles (peopleroles_id, people_id, role_id, peopleroles_date_role_acquired) VALUES (6, 4, 3, '2023-01-06');
-INSERT INTO people_roles (peopleroles_id, people_id, role_id, peopleroles_date_role_acquired) VALUES (7, 5, 3, '2023-01-07');
-INSERT INTO people_roles (peopleroles_id, people_id, role_id, peopleroles_date_role_acquired) VALUES (8, 6, 2, '2023-01-08'), (9, 6, 1, '2023-01-09');
-INSERT INTO people_roles (peopleroles_id, people_id, role_id, peopleroles_date_role_acquired) VALUES (10, 7, 1, '2023-01-10');
-INSERT INTO people_roles (peopleroles_id, people_id, role_id, peopleroles_date_role_acquired) VALUES (11, 8, 1, '2023-01-11'), (12, 8, 4, '2023-01-11');
-INSERT INTO people_roles (peopleroles_id, people_id, role_id, peopleroles_date_role_acquired) VALUES (13, 9, 2, '2023-01-13');
-INSERT INTO people_roles (peopleroles_id, people_id, role_id, peopleroles_date_role_acquired) VALUES (14, 10, 2, '2023-01-14'), (15, 10, 1, '2023-01-15');
+INSERT INTO peopleroles (peopleroles_id, people_id, role_id, peopleroles_date_role_acquired) VALUES (1, 1, 2, '2023-01-01');
+INSERT INTO peopleroles (peopleroles_id, people_id, role_id, peopleroles_date_role_acquired) VALUES (2, 2, 5, '2023-01-02'), (3, 2, 6, '2023-01-013');
+INSERT INTO peopleroles (peopleroles_id, people_id, role_id, peopleroles_date_role_acquired) VALUES (4, 3, 2, '2023-01-04'), (5, 3, 4, '2023-01-05');
+INSERT INTO peopleroles (peopleroles_id, people_id, role_id, peopleroles_date_role_acquired) VALUES (6, 4, 3, '2023-01-06');
+INSERT INTO peopleroles (peopleroles_id, people_id, role_id, peopleroles_date_role_acquired) VALUES (7, 5, 3, '2023-01-07');
+INSERT INTO peopleroles (peopleroles_id, people_id, role_id, peopleroles_date_role_acquired) VALUES (8, 6, 2, '2023-01-08'), (9, 6, 1, '2023-01-09');
+INSERT INTO peopleroles (peopleroles_id, people_id, role_id, peopleroles_date_role_acquired) VALUES (10, 7, 1, '2023-01-10');
+INSERT INTO peopleroles (peopleroles_id, people_id, role_id, peopleroles_date_role_acquired) VALUES (11, 8, 1, '2023-01-11'), (12, 8, 4, '2023-01-11');
+INSERT INTO peopleroles (peopleroles_id, people_id, role_id, peopleroles_date_role_acquired) VALUES (13, 9, 2, '2023-01-13');
+INSERT INTO peopleroles (peopleroles_id, people_id, role_id, peopleroles_date_role_acquired) VALUES (14, 10, 2, '2023-01-14'), (15, 10, 1, '2023-01-15');
 
 
